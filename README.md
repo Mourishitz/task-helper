@@ -1,66 +1,60 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Task Helper
 
-## About Laravel
+Um app simples focado em ajudar no controle de tarefas.
+Este projeto foi feito em paralelo com o curso de [Desenvolvimento Web Avançado]('https://www.udemy.com/course/curso-completo-do-desenvolvedor-laravel')
+e experiências profissionais.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[![wakatime](https://wakatime.com/badge/user/c3066713-8dca-47d5-9002-0096164d3393/project/786949da-0473-4d4a-abe6-d8b3211ea41f.svg)](https://wakatime.com/badge/user/c3066713-8dca-47d5-9002-0096164d3393/project/786949da-0473-4d4a-abe6-d8b3211ea41f)
+[![Laravel](https://img.shields.io/badge/Laravel-Docs-orange)](https://laravel.com/docs/9.x)
+[![Udemy](https://img.shields.io/badge/Udemy-Site-blueviolet)](https://www.udemy.com/course/curso-completo-do-desenvolvedor-laravel)
+[![Gitmoji](https://img.shields.io/badge/Commits-Gitmoji-yellow)](https://gitmoji.dev)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Referência
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Curso completo de Desenvolvimento Web Avançado](https://www.udemy.com/course/curso-completo-do-desenvolvedor-laravel)
+- [Editor Markdown](https://readme.so)
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Stack utilizada
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**Front-end:** Laravel Ui, Blade, Bootstrap
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Back-end:** Laravel Octane(Swoole), PHP, WSL2(Ubuntu)
 
-## Laravel Sponsors
+**Banco de Dados:** Redis, PostgreSQL
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Rodando localmente
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Clone o projeto
 
-## Contributing
+```bash
+  git clone https://github.com/Mourishitz/task-helper.git
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Entre no diretório do projeto
 
-## Code of Conduct
+```bash
+  cd task-helper
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Instale as dependências
 
-## Security Vulnerabilities
+```bash
+  npm install &&
+  composer install 
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Inicie o servidor (recomendado utilizar as configurações abaixo)
 
-## License
+```bash
+   php artisan octane:start --server=swoole --host=0.0.0.0 --max-requests=3000 --workers=4 --task-workers=12 --port=8089
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Inicie o servidor (alternativo)
+
+```bash
+   php artisan serve
+```
+
