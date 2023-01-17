@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\MailMessage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('task', 'App\Http\Controllers\TaskController');
+Route::get('mail', function (){
+    return new MailMessage();
+});
