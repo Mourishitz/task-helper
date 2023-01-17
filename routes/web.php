@@ -18,10 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('task', 'App\Http\Controllers\TaskController');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->middleware('verified')
+    ->name('home');
+
+Route::resource('task', 'App\Http\Controllers\TaskController')
+    ->middleware('verified');
+
 Route::get('mail', function (){
     return new MailMessage();
 });
