@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewTaskMail;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TaskController extends Controller
 {
@@ -37,22 +39,24 @@ class TaskController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $task = Task::create($request->all());
+        Mail::to(auth()->user()->email)->send(new NewTaskMail($task));
+        return redirect()->route('task.show', ['task'=> $task->id]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return NewTaskMail
      */
     public function show(Task $task)
     {
-        //
+        return $task;
     }
 
     /**
