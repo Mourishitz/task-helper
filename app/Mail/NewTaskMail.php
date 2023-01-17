@@ -27,7 +27,7 @@ class NewTaskMail extends Mailable
     {
         $this->url = "http://localhost:8089/task/{$task->id}";
         $this->task = $task;
-        $this->final_date = $task->final_date ?? 'Nenhuma.';
+        $this->final_date = date('d/m/Y', strtotime($task->final_date)) ?? 'Nenhuma.';
     }
 
     /**
@@ -38,7 +38,7 @@ class NewTaskMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'New Task Mail',
+            subject: 'Nova tarefa criada!',
         );
     }
 

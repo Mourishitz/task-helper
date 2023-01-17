@@ -52,11 +52,11 @@ class TaskController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Task  $task
-     * @return NewTaskMail
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Task $task)
     {
-        return $task;
+        return view('task.show', ['task' => $task]);
     }
 
     /**
