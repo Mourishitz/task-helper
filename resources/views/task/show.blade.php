@@ -2,6 +2,7 @@
 
 @vite('resources/css/app.css')
 @section('content')
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
 
     <div class="container">
@@ -15,22 +16,18 @@
                         <div class="card-body">
                             <label for="name">Nome da Tarefa</label>
                             <input name="name" id="name" type="text" value="{{ $task->name }}" class="input input-primary w-full max-w-xs" />
-                            <div>
-                                <label class="label cursor-pointer">
-                                    <span class="label-text">Tem prazo final?</span>
-                                    <input type="checkbox"
-                                           checked="{{isset($task->final_date)}}"
-                                           id="has_date"
-                                           class="checkbox checkbox-primary"
-                                    />
-                                </label>
+
+                            <div class="flex justify-content-start">
+                                <span>Prazo final: &nbsp;</span>
+                                @if(date('d/m/Y - D', strtotime($task->final_date)) === '01/01/1970 - Thu')
+                                    Nenhum
+                                @else
+                                    {{date('d/m/Y - D', strtotime($task->final_date))}}
+                                @endif
                             </div>
-                            <div id="date_div">
-                                <label for="date">Data Final</label>
-                                <input type="date" value={{$task->final_date}} name="final_date" id="date" class="w-full input input-primary"/>
-                            </div>
+
                             <label for="importance">Nível de Importância</label>
-                            <input id="importance" value={{ $task->importance }} name="importance" type="range" min="0" max="100" step="25" class="w-full range range-primary" />
+                            <input id="importance" value="{{ $task->importance }}" name="importance" type="range" min="0" max="100" step="25" class="w-full range range-primary" />
                             <div class="w-full flex justify-content-between text-xs px-2">
                                 <span>0</span>
                                 <span>25</span>
@@ -43,7 +40,9 @@
 
                         </div>
                     </fieldset>
-                    <button class="btn btn-outline-primary flex align-items-center m-3">Editar Tarefa</button>
+                    <form action="{{ url()->previous() }}" class="m-3">
+                        <button class="btn btn-outline-primary w-full">Voltar</button>
+                    </form>
                 </div>
             </div>
         </div>
