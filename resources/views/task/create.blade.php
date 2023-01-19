@@ -8,7 +8,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Adicionar Tarefa') }}</div>
+                    <div class="card-header flex justify-content-between align-items-center">
+                        {{ __('Adicionar Tarefa') }}
+                        <form action="{{ url()->previous() }}" class="pt-3">
+                            <button class="btn btn-outline-danger w-full btn-xs flex pb-sm-4">Voltar</button>
+                        </form>
+                    </div>
 
                     <form method="post" action="{{ route('task.store') }}">
                         @csrf

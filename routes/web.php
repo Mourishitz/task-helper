@@ -27,6 +27,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::resource('task', 'App\Http\Controllers\TaskController')
     ->middleware('verified');
 
+Route::get('finished-tasks', [\App\Http\Controllers\TaskController::class, 'finished_index'])
+    ->middleware('verified');
+
 Route::get('mail', function (){
     return new MailMessage();
 });

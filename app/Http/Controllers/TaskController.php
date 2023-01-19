@@ -18,11 +18,25 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $tasks = Task::where('user_id', $user->id)->where('is_active', true)->paginate(4);
+        return view('task.index', ['tasks' => $tasks, 'type' => 'active']);
+    }
+
+    /**
+     * Display a listing of the inactive resource.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function finished_index()
+    {
+        $user = auth()->user();
+        $tasks = Task::where('user_id', $user->id)->where('is_active', false)->paginate(4);
+        return view('task.index', ['tasks' => $tasks, 'type' => 'finished']);
     }
 
     /**
