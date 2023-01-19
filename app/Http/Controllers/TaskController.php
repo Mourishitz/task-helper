@@ -43,7 +43,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $task = Task::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        $task = Task::create($data);
         Mail::to(auth()->user()->email)->send(new NewTaskMail($task));
         return redirect()->route('task.show', ['task'=> $task->id]);
     }

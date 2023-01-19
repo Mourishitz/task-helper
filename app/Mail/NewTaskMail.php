@@ -27,7 +27,8 @@ class NewTaskMail extends Mailable
     {
         $this->url = "http://localhost:8089/task/{$task->id}";
         $this->task = $task;
-        $this->final_date = date('d/m/Y', strtotime($task->final_date)) ?? 'Nenhuma.';
+        $date = date('d/m/Y - D', strtotime($task->final_date));
+        $this->final_date = $date === '01/01/1970 - Thu' ? 'Nenhuma.' :$date;
     }
 
     /**
