@@ -84,9 +84,15 @@
                                         {{date('d/m/y H:i', strtotime($t['created_at']))}}
                                     </td>
                                     <th>
-                                        <form action="{{ url()->to("task/{$t['id']}")}}" class="m-3">
-                                            <button class="btn btn-active btn-ghost">Visualizar</button>
-                                        </form>
+                                        <div class="flex justify-content-center mt-3">
+                                            <form action="{{ url()->to("task/{$t['id']}")}}">
+                                                <button class="btn btn-active btn-ghost">Visualizar</button>
+                                            </form>
+                                            &nbsp;
+                                            <form action="{{ url()->to("task/") }}">
+                                                <button class="btn btn-active btn-success">Concluir</button>
+                                            </form>
+                                        </div>
                                     </th>
                                 </tr>
                                 @endforeach
