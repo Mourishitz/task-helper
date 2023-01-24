@@ -91,11 +91,14 @@ class TaskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $request['color'] = $task['color'];
+        dd($request);
+        $task->update($request->all());
+        return view('task.show', ['task'=>$task->id]);
     }
 
     /**

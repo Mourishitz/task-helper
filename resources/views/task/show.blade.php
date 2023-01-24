@@ -12,9 +12,12 @@
                     <div class="card-header flex justify-content-center" style="background-color: {{ $task->color }}">
                     </div>
                     <fieldset disabled id="fieldset">
-                        <form>
-                            <div class="card-body">
+                        <form action="{{ route('task.update', ['task' => $task->id]) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <input name="_method" type="hidden" value="PUT">
 
+                            <div class="card-body">
                                 <label for="name">Nome da Tarefa</label>
                                 <input name="name" id="name" type="text" value="{{ $task->name }}" class="input input-primary w-full max-w-xs" />
 
