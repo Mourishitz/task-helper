@@ -21,12 +21,13 @@
                         </div>
 
                         <div class="stat">
-                            <div class="stat-title">Foram criadads</div>
+                            <div class="stat-title">Foram criadas</div>
                             <div class="stat-value">{{ $month_tasks }}</div>
                             <div class="stat-title">tarefas esse mês</div>
                             <div class="stat-actions">
-                                <button class="btn btn-sm">Withdrawal</button>
-                                <button class="btn btn-sm">deposit</button>
+                                <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-green-500 rounded-full">
+                                    {{ $month_tasks - $active_tasks }} Realizadas
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -38,7 +39,7 @@
                                     <div class="pt-6 text-center bg-white rounded">
                                         <h4 class="mb-2 text-xs text-gray-500">Ultima tarefa realizada:</h4>
                                         <p class="mb-1 text-4xl font-bold">{{ $latest_task_days === 0 ? 'Hoje' : "$latest_task_days dias" }}</p>
-                                        <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-green-500 rounded-full">{{ $latest_task['name'] }}</span>
+                                        <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-green-500 rounded-full">{{ $latest_task }}</span>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/2 lg:w-1/4 p-4">
@@ -59,9 +60,11 @@
                                 </div>
                                 <div class="w-full md:w-1/2 lg:w-1/4 p-4">
                                     <div class="pt-6 text-center bg-white rounded">
-                                        <h4 class="mb-2 text-xs text-gray-500">Visit Duration</h4>
-                                        <p class="mb-1 text-4xl font-bold">0m 50s</p>
-                                        <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-green-500 rounded-full">+15s</span>
+                                        <h4 class="mb-2 text-xs text-gray-500">Membro desde:</h4>
+                                        <p class="mb-1 text-4xl font-bold">{{ date('M Y', strtotime($member_since)) }}</p>
+                                        <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-green-500 rounded-full">
+                                            {{ date('d/m/y H:i', strtotime($member_since)) }}
+                                        </span>
                                         <div class="chart" data-type="area-small" data-variant="orange"></div>
                                     </div>
                                 </div>
