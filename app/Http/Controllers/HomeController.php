@@ -32,6 +32,7 @@ class HomeController extends Controller
             $active_tasks,
             $month_tasks,
             $latest_task,
+            $latest_task_days,
             $tasks_to_finish,
             $first_date_task,
             $over_50_importance_task,
@@ -40,21 +41,28 @@ class HomeController extends Controller
             fn () => Task::where('user_id', $user->id)->where('is_active', true)->count(),
             fn () => Task::whereMonth('created_at', '=', date('m'))->count(),
             fn () => Task::where('user_id', $user->id)->orderBy('updated_at', 'desc')->first(),
+            fn () => Carbon::now()->diffInDays(date(
+                (Task::where('user_id', $user->id)
+                    ->where('is_active', false)
+                    ->orderBy('updated_at', 'desc')
+                    ->first()
+                )['updated_at'])),
             fn () => Task::where('final_date', '>', Carbon::now())->count(),
-            fn () => Task::where('final_date', '>', Carbon::now())->orderBy('final_date', 'asc')->first(),
+            fn () => date('d/m/Y - D', strtotime(
+                Task::where('final_date', '>', Carbon::now())
+                    ->orderBy('final_date', 'asc')
+                    ->first()['final_date'])
+            ),
             fn () => Task::where('importance', '>=', 50)->count(),
             fn () => Task::where('importance', '>=', 75)->count(),
         ]);
-
-        $today = Carbon::now();
-        $latest_task_days = $today->diffInDays(date($latest_task['updated_at']));
 
         $data = [
             'name'              => $user->name,
             'active_tasks'      => $active_tasks,
             'month_tasks'       => $month_tasks,
             'latest_task'       => $latest_task,
-            'first_date_task'   => date('d/m/Y - D', strtotime($first_date_task['final_date'])),
+            'first_date_task'   => $first_date_task,
             'tasks_to_finish'   => $tasks_to_finish,
             'latest_task_days'  => $latest_task_days,
             'over_50_importance_task' => $over_50_importance_task,
