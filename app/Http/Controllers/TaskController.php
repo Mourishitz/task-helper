@@ -67,7 +67,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param Task $task
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Task $task)
@@ -78,7 +78,7 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Task  $task
+     * @param Task $task
      * @return \Illuminate\Http\Response
      */
     public function edit(Task $task)
@@ -90,24 +90,33 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
+     * @param Task $task
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function update(Request $request, Task $task)
     {
-        $request['color'] = $task['color'];
-        $task->update($request->all());
-        return view('task.show', ['task'=>$task]);
+        if(auth()->user()->id == $task['user_id']){
+            $request['color'] = $task['color'];
+            $task->update($request->all());
+            return view('task.show', ['task'=>$task]);
+        }
+        dd('nao');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function destroy(Task $task)
     {
-        //
+        $user = auth()->user();
+        if($user->id == $task['user_id']){
+            $task->update(['is_active' => !$task['is_active']]);
+            $tasks = Task::where('user_id', $user->id)->where('is_active', $task['is_active'])->paginate(4);
+            return view('task.index', ['tasks' => $tasks, 'type' => $task['is_active'] ? 'active' : 'finished']);
+        }
+        return view('');
     }
 }

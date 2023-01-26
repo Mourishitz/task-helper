@@ -67,6 +67,12 @@
                     >
                         Editar
                     </button>
+                    <form action="{{ route('task.destroy', ['task' => $task->id]) }}" method="post" class="m-3 mt-2 mb-0">
+                        @csrf
+                        @method('DELETE')
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button class="btn btn-outline-success w-full">{{ $task->is_active ? 'Concluir' : 'Reativar' }} Tarefa</button>
+                    </form>
                     <form action="{{ url()->to('task') }}" class="m-3 mt-2">
                         <button class="btn btn-outline-primary w-full">Visualizar todas as tarefas</button>
                     </form>

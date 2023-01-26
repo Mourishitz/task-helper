@@ -15,5 +15,6 @@ class Task extends Model
         'final_date',
         'description',
         'importance',
+        'is_active'
     ];
 }
