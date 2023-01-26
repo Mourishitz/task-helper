@@ -38,7 +38,7 @@
                                 <div class="w-full md:w-1/2 lg:w-1/4 p-4">
                                     <div class="pt-6 text-center bg-white rounded">
                                         <h4 class="mb-2 text-xs text-gray-500">Ultima tarefa realizada:</h4>
-                                        <p class="mb-1 text-4xl font-bold">{{ $latest_task_days === 0 ? 'Hoje' : "$latest_task_days dias" }}</p>
+                                        <p class="mb-1 text-4xl font-bold">{{ $latest_task_days === 0 ? 'Hoje' : "$latest_task_days dias" ?? 'Não há registros'}}</p>
                                         <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-green-500 rounded-full">{{ $latest_task }}</span>
                                     </div>
                                 </div>
@@ -47,15 +47,13 @@
                                         <h4 class="mb-2 text-xs text-gray-500">Tarefas com prazo</h4>
                                         <p class="mb-1 text-4xl font-bold">{{ $tasks_to_finish }}</p>
                                         <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-red-500 rounded-full">{{ $first_date_task }}</span>
-                                        <div class="chart" data-type="area-small" data-variant="blue"></div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/2 lg:w-1/4 p-4">
                                     <div class="pt-6 text-center bg-white rounded">
                                         <h4 class="mb-2 text-xs text-gray-500">Tarefas Importantes</h4>
                                         <p class="mb-1 text-4xl font-bold">{{ $over_50_importance_task }}</p>
-                                        <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-red-500 rounded-full">{{$over_75_importance_task}} acima de 75</span>
-                                        <div class="chart" data-type="area-small" data-variant="green"></div>
+                                        <span class="inline-block py-1 px-2 mb-2 text-xs text-white bg-red-500 rounded-full">{{$over_75_importance_task }} acima de 75</span>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/2 lg:w-1/4 p-4">

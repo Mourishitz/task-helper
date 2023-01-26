@@ -96,9 +96,8 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $request['color'] = $task['color'];
-        dd($request);
         $task->update($request->all());
-        return view('task.show', ['task'=>$task->id]);
+        return view('task.show', ['task'=>$task]);
     }
 
     /**

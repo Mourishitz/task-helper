@@ -13,6 +13,65 @@
                         Tarefas
                     </div>
 
+
+
+                    <div class="z-1 absolute inset-0 hidden justify-center items-center" id="overlay">
+                        <div class="bg-gray-200 max-w-sm py-2 px-3 rounded shadow-xl text-gray-800">
+                            <div class="flex justify-between items-center">
+                                <h4>Concluir Tarefa?</h4>
+                                <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="mt-2 text-sm">
+                                <p>Você poderá visualizar a tarefa em 'Tarefas Concluídas'</p>
+                            </div>
+                            <div class="mt-3 flex justify-end space-x-3">
+                                <button class="btn btn-sm btn-outline-warning" id="cancel">Cancelar</button>
+                                <button class="btn btn-sm btn-outline-danger" id="finish">Concluir Tarefa</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        window.addEventListener('DOMContentLoaded', () =>{
+                            const cancel = document.querySelector('#cancel')
+                            const finish = document.querySelector('#finish')
+                            const overlay = document.querySelector('#overlay')
+                            const checkbox = document.querySelector('#checkbox')
+                            const closeBtn = document.querySelector('#close-modal')
+
+                            const toggleModal = () => {
+                                overlay.classList.toggle('hidden')
+                                overlay.classList.toggle('flex')
+                            }
+
+                            checkbox.addEventListener('click', toggleModal)
+                            overlay.addEventListener('focus', toggleModal)
+                            closeBtn.addEventListener('click', ()=>{
+                                toggleModal();
+                                if(checkbox.checked === true){
+                                    checkbox.checked = false
+                                }
+                            })
+                            finish.addEventListener('click', ()=>{
+                                toggleModal();
+                                if(checkbox.checked === true){
+                                    checkbox.checked = false
+                                }
+                            })
+                            cancel.addEventListener('click', ()=>{
+                                toggleModal();
+                                if(checkbox.checked === true){
+                                    checkbox.checked = false
+                                }
+                            })
+                        })
+
+                    </script>
+
                     <div class="card-body">
                         <div class="overflow-x-auto w-full">
 
@@ -31,16 +90,14 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <label>
-                                            <input type="checkbox" class="checkbox" />
-                                        </label>
+                                        &nbsp;
                                     </th>
                                     <th>ID</th>
                                     <th>Nome</th>
                                     <th>Importância</th>
                                     <th>Prazo Final</th>
                                     <th>Criado em:</th>
-                                    <th>&nbsp;</th>
+                                    <th>Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -48,7 +105,11 @@
                                 <tr>
                                     <th>
                                         <label>
-                                            <input type="checkbox" class="checkbox" />
+                                            <input
+                                                id="checkbox"
+                                                type="checkbox"
+                                                class="checkbox"
+                                            />
                                         </label>
                                     </th>
                                     <td>
@@ -117,8 +178,8 @@
                                 </div>
                             </div>
                             <br>
-                            <form action="{{ url()->previous() }}" class="w-full">
-                                <button class="btn btn-outline-primary w-full">Voltar</button>
+                            <form action="{{ url()->to('home') }}" class="w-full">
+                                <button class="btn btn-outline-primary w-full">Dashboard</button>
                             </form>
                         </div>
                     </div>

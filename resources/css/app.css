@@ -5,3 +5,7 @@
 .debug{
     border: 2px solid red;
 }
+
+.z-1{
+    z-index: 1;
+}

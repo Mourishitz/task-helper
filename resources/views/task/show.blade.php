@@ -67,8 +67,8 @@
                     >
                         Editar
                     </button>
-                    <form action="{{ url()->previous() }}" class="m-3 mt-2">
-                        <button class="btn btn-outline-primary w-full">Voltar</button>
+                    <form action="{{ url()->to('task') }}" class="m-3 mt-2">
+                        <button class="btn btn-outline-primary w-full">Visualizar todas as tarefas</button>
                     </form>
                 </div>
             </div>
