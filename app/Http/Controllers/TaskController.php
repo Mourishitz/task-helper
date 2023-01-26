@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FinishedTaskMail;
 use App\Mail\NewTaskMail;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Laravel\Octane\Facades\Octane;
 
 class TaskController extends Controller
 {
@@ -72,7 +74,10 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('task.show', ['task' => $task]);
+        if(auth()->user()->id == $task['user_id']){
+            return view('task.show', ['task' => $task]);
+        }
+        return view('unauthorized');
     }
 
     /**
@@ -100,7 +105,7 @@ class TaskController extends Controller
             $task->update($request->all());
             return view('task.show', ['task'=>$task]);
         }
-        dd('nao');
+        return view('unauthorized');
     }
 
     /**
@@ -114,6 +119,7 @@ class TaskController extends Controller
         $user = auth()->user();
         if($user->id == $task['user_id']){
             $task->update(['is_active' => !$task['is_active']]);
+            Mail::to($user->email)->send(new FinishedTaskMail($task));
             $tasks = Task::where('user_id', $user->id)->where('is_active', $task['is_active'])->paginate(4);
             return view('task.index', ['tasks' => $tasks, 'type' => $task['is_active'] ? 'active' : 'finished']);
         }
