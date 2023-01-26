@@ -117,6 +117,6 @@ class TaskController extends Controller
             $tasks = Task::where('user_id', $user->id)->where('is_active', $task['is_active'])->paginate(4);
             return view('task.index', ['tasks' => $tasks, 'type' => $task['is_active'] ? 'active' : 'finished']);
         }
-        return view('');
+        return view('unauthorized');
     }
 }
